@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://worldnews24-india.netlify.app/sitemap.xml
