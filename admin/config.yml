@@ -1,0 +1,20 @@
+backend:
+  name: git-gateway
+  branch: main # आपकी रिपॉजिटरी का ब्रांच नाम
+
+media_folder: "images/uploads" # इमेज अपलोड होने की जगह
+public_folder: "/images/uploads"
+
+collections:
+  - name: "news"
+    label: "News Post"
+    folder: "content/news"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Layout", name: "layout", type: "hidden", default: "news"}
+      - {label: "Title (हेडिंग)", name: "title", type: "string"}
+      - {label: "Category (कैटेगरी)", name: "category", type: "select", options: ["राजनीति", "भारत", "विश्व", "खेल", "मनोरंजन", "टेक्नोलॉजी", "बिजनेस"]}
+      - {label: "Featured Image (फोटो)", name: "image", type: "image"}
+      - {label: "Description (छोटा विवरण)", name: "description", type: "string"}
+      - {label: "Body Content (पूरी खबर)", name: "body", type: "markdown"}
