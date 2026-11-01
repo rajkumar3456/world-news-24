@@ -1,0 +1,29 @@
+name: Auto Post News Loader
+
+on:
+  schedule:
+    - cron: '0 */2 * * *' # हर 2 घंटे में अपने आप चलेगा
+  workflow_dispatch: # बटन दबाकर तुरंत चलाने के लिए
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16'
+
+    - name: Fetch and Inject Latest News
+      run: node fetch_news.js
+
+    - name: Commit and Push Changes
+      run: |
+        git config --global user.name "NewsBot"
+        git config --global user.email "newsbot@github.com"
+        git add index.html
+        git commit -m "Auto-updated latest news grid [Skip CI]" || exit 0
+        git push
